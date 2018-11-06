@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MagicScanner.xcodeproj">
+      location = "group:/Users/axel/Desktop/Projets Xcode/MagicScanner/MagicScanner/Overlay.sks">
+   </FileRef>
+   <FileRef
+      location = "group:Swiftfall-master">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

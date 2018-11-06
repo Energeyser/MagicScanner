@@ -13,6 +13,7 @@
 		77112A6B2191D7B700842C40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77112A692191D7B700842C40 /* Main.storyboard */; };
 		77112A6D2191D7B800842C40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77112A6C2191D7B800842C40 /* Assets.xcassets */; };
 		77112A702191D7B800842C40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77112A6E2191D7B800842C40 /* LaunchScreen.storyboard */; };
+		77112A852191EDF600842C40 /* Swiftfall in Frameworks */ = {isa = PBXBuildFile; fileRef = 77112A842191EDF600842C40 /* Swiftfall */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		77112A6C2191D7B800842C40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77112A6F2191D7B800842C40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77112A712191D7B800842C40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77112A842191EDF600842C40 /* Swiftfall */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Swiftfall; path = ../../../Downloads/Swiftfall/Sources/Swiftfall; sourceTree = "<group>"; };
+		77112A862191F47300842C40 /* Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Overlay.sks; path = "/Users/axel/Desktop/Projets Xcode/MagicScanner/MagicScanner/Overlay.sks"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77112A852191EDF600842C40 /* Swiftfall in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +46,7 @@
 			children = (
 				77112A622191D7B700842C40 /* MagicScanner */,
 				77112A612191D7B700842C40 /* Products */,
+				77112A7E2191EB0F00842C40 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +61,7 @@
 		77112A622191D7B700842C40 /* MagicScanner */ = {
 			isa = PBXGroup;
 			children = (
+				77112A862191F47300842C40 /* Overlay.sks */,
 				77112A632191D7B700842C40 /* AppDelegate.swift */,
 				77112A652191D7B700842C40 /* art.scnassets */,
 				77112A672191D7B700842C40 /* ViewController.swift */,
@@ -65,6 +71,14 @@
 				77112A712191D7B800842C40 /* Info.plist */,
 			);
 			path = MagicScanner;
+			sourceTree = "<group>";
+		};
+		77112A7E2191EB0F00842C40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77112A842191EDF600842C40 /* Swiftfall */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GZ5YW8HSFH;
 				INFOPLIST_FILE = MagicScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,7 +311,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = axel.MagicScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -307,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GZ5YW8HSFH;
 				INFOPLIST_FILE = MagicScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -314,7 +330,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = axel.MagicScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
