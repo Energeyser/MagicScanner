@@ -28,6 +28,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,32 +74,37 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             planeNode.eulerAngles.x = -.pi/2
             
             
-            
             let names = ["breath_of_fury", "graven_dominator"]
             for name in names {
                 if imageAnchor.referenceImage.name?.range(of: name) != nil {
+                    
+                    makeGetCall(cardName: name) { (output) in
+                        print("pimpampoum " + output)
+                        let textNode = self.createTextNode(string: "Valeur : " + output + " €")
+                        textNode.position = SCNVector3Zero
+                        var minVec = SCNVector3Zero
+                        var maxVec = SCNVector3Zero
+                        (minVec, maxVec) =  textNode.boundingBox
+                        textNode.pivot = SCNMatrix4MakeTranslation(
+                            minVec.x + (maxVec.x - minVec.x)/2,
+                            minVec.y,
+                            minVec.z + (maxVec.z - minVec.z)/2
+                        )
+                        textNode.position.z =  Float(-1*imageAnchor.referenceImage.physicalSize.width/2 - 0.02)
+                        textNode.eulerAngles.x = -.pi/2
+                        node.addChildNode(textNode)
+                        
+                        node.addChildNode(planeNode)
+                    }
+                    
                     let image = UIImage(named: name)
                     plane.firstMaterial?.diffuse.contents = image
                     
-                    let textNode = createTextNode(string: name)
-                    textNode.position = SCNVector3Zero
-                    var minVec = SCNVector3Zero
-                    var maxVec = SCNVector3Zero
-                    (minVec, maxVec) =  textNode.boundingBox
-                    textNode.pivot = SCNMatrix4MakeTranslation(
-                        minVec.x + (maxVec.x - minVec.x)/2,
-                        minVec.y,
-                        minVec.z + (maxVec.z - minVec.z)/2
-                    )
-                    textNode.position.z =  Float(-1*imageAnchor.referenceImage.physicalSize.width/2 - 0.02)
-                    textNode.eulerAngles.x = -.pi/2
-                    node.addChildNode(textNode)
+                    
                 }
             }
             
-           
-           
-
+          
 
            /*let shipScene = SCNScene(named: "art.scnassets/ship.scn")!
             let shipNode = shipScene.rootNode.childNodes.first!
@@ -106,9 +113,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             shipNode.eulerAngles.x = .pi/2
             
             planeNode.addChildNode(shipNode)*/
-
-            
-            node.addChildNode(planeNode)
+          
         }
         
 
@@ -128,6 +133,61 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         textNode.scale = SCNVector3(fontSize, fontSize, fontSize)
         
         return textNode
+    }
+    
+    func makeGetCall(cardName: String, completionBlock: @escaping (String) -> Void) -> Void  {
+        // Set up the URL request
+        let todoEndpoint: String = "https://api.scryfall.com/cards/named?fuzzy=" + cardName
+        guard let url = URL(string: todoEndpoint) else {
+            print("Error: cannot create URL")
+            return
+        }
+        let urlRequest = URLRequest(url: url)
+        
+        // set up the session
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        // make the request
+        let task = session.dataTask(with: urlRequest) {
+            (data, response, error) in
+            // check for any errors
+            guard error == nil else {
+                print("error calling GET on /todos/1")
+                print(error!)
+                return
+            }
+            // make sure we got data
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                return
+            }
+            // parse the result as JSON, since that's what the API provides
+            do {
+                guard let jsonData = try JSONSerialization.jsonObject(with: responseData, options: [])
+                    as? [String: Any] else {
+                        print("error trying to convert data to JSON")
+                        return
+                }
+                // now we have the todo
+                // let's just print it to prove we can access it
+                //print("The todo is: " + todo.description)
+                
+                // the todo object is a dictionary
+                // so we just access the title using the "title" key
+                // so check for a title and print it if we have one
+                let jsonPrice = jsonData["eur"] as? String
+                completionBlock(jsonPrice!);
+                print(jsonPrice)
+                
+            } catch  {
+                print("error trying to convert data to JSON")
+                return
+            }
+        }
+    
+        task.resume()
+        return
     }
     
 /*
